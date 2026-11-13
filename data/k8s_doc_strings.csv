@@ -1,0 +1,20 @@
+id,scenario,kind,doc_key,text
+D01,crashloop-app,status,pod-lifecycle,alessandras-pod    0/1     CrashLoopBackOff   200        2d9h
+D02,crashloop-app,excerpt,pod-lifecycle,"When a pod is failing to start repeatedly, CrashLoopBackOff may appear in the Status field of some kubectl commands."
+D03,oomkilled,status,assign-memory,memory-demo-2   0/1       OOMKilled   1          24s
+D04,oomkilled,event,assign-memory,Warning OOMKilling Memory cgroup out of memory: Kill process 4481 (stress) score 1994 or sacrifice child
+D05,oomkilled,event,assign-memory,... Warning BackOff   Back-off restarting failed container
+D06,pending-cpu,status,assign-cpu,cpu-demo-2   0/1       Pending   0          7m
+D07,pending-cpu,event,assign-cpu,FailedScheduling      No nodes are available that match all of the following predicates:: Insufficient cpu (3).
+D08,pending-cpu,event,resources,Warning  FailedScheduling  23s   default-scheduler  0/42 nodes available: insufficient cpu
+D09,node-notready,status,debug-cluster,kube-worker-1            NotReady     <none>    1h      v1.23.3
+D10,node-notready,condition,debug-cluster,"Ready                Unknown   Thu, 17 Feb 2022 17:12:40 -0500   Thu, 17 Feb 2022 17:13:52 -0500   NodeStatusUnknown   Kubelet stopped posting node status."
+D11,node-notready,condition,debug-cluster,"DiskPressure         Unknown   Thu, 17 Feb 2022 17:12:40 -0500   Thu, 17 Feb 2022 17:13:52 -0500   NodeStatusUnknown   Kubelet stopped posting node status."
+D12,dns-resolution,log,dns,nslookup: can't resolve 'kubernetes.default'
+D13,dns-resolution,log,dns,"2022-03-18T07:12:15.699431183Z [INFO] 10.96.144.227:52299 - 3686 ""A IN serverproxy.contoso.net.cluster.local. udp 52 false 512"" SERVFAIL qr,aa,rd 145 0.000091221s"
+D14,hpa-not-scaling,excerpt,hpa,"The metrics.k8s.io API is
+usually provided by an add-on named Metrics Server, which needs to be launched separately."
+D15,liveness-probe,event,probes,"Warning  Unhealthy  10s (x3 over 20s)  kubelet, node01    Liveness probe failed: cat: can't open '/tmp/healthy': No such file or directory"
+D16,liveness-probe,event,probes,"Normal   Killing    10s                kubelet, node01    Container liveness failed liveness probe, will be restarted"
+D17,imagepull,status,deployment,nginx-deployment-3066724191-08mng   0/1       ImagePullBackOff   0          6s
+D18,imagepull,excerpt,images,"The status ImagePullBackOff means that a container could not start because Kubernetes"
