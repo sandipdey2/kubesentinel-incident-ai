@@ -16,6 +16,7 @@ from core.stats import anomaly_score
 
 st.set_page_config(page_title="KubeSentinel - Kubernetes incident response", page_icon="🛡️", layout="wide")
 REPO = "https://github.com/sandipdey2/kubesentinel-incident-ai"
+LIVE_DEMO = "https://kubese-tbwobt7dmo4e4zbdef8t4e.streamlit.app/"
 
 
 @st.cache_resource(show_spinner="Training classifiers on Loghub and NAB...")
@@ -26,7 +27,7 @@ def models():
 scenarios = load_scenarios()
 st.title("🛡️ KubeSentinel")
 st.caption("Multi-agent Kubernetes incident triage, diagnosis and remediation planning. "
-           f"LangGraph supervisor + real MCP tool server + RAG over kubernetes.io. [Source]({REPO})")
+           f"LangGraph supervisor + real MCP tool server + RAG over kubernetes.io. [Source]({REPO}) · [Live demo]({LIVE_DEMO})")
 st.info("Cluster data is a **replay of public datasets** (kubernetes.io example output, Loghub logs, NAB metrics) "
         "mapped onto Kubernetes scenarios. KubeSentinel **never executes commands**; write steps need human approval.", icon="ℹ️")
 

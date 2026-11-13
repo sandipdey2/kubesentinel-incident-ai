@@ -1,6 +1,7 @@
 # 🛡️ KubeSentinel: multi-agent incident response for Kubernetes
 
 **Repository:** https://github.com/sandipdey2/kubesentinel-incident-ai
+**🚀 Live demo:** https://kubese-tbwobt7dmo4e4zbdef8t4e.streamlit.app/
 **Author:** Sandip Dey · AI Mastery Capstone, Project 7: Integrative Industry Synthesis
 **Industry:** Cloud / DevOps site reliability engineering (SRE)
 
@@ -105,6 +106,9 @@ Re-run the evaluation with `pip install -r requirements-dev.txt`, then
 Rebuild the data from upstream: `python scripts/fetch_data.py && python scripts/build_runbooks.py && python scripts/build_scenarios.py`.
 
 ## Deploy on Streamlit Community Cloud
+**Live deployment:** https://kubese-tbwobt7dmo4e4zbdef8t4e.streamlit.app/
+
+To deploy your own copy:
 1. Push this repo to GitHub, then go to https://share.streamlit.io → **Create app**. Pick the repo, branch `main` and main file `app.py`.
 2. **Advanced settings → Python version: 3.13.**
 3. **Secrets:** paste the following (template in `.streamlit/secrets.toml.example`; the real `secrets.toml` is git-ignored):

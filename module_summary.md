@@ -1,6 +1,6 @@
 # KubeSentinel: A Multi-Agent Incident-Response Assistant for Kubernetes Operations
 
-**Sandip Dey** · AI Mastery Capstone, Project 7: Integrative Industry Synthesis · Repository: https://github.com/sandipdey2/kubesentinel-incident-ai
+**Sandip Dey** · AI Mastery Capstone, Project 7: Integrative Industry Synthesis · Repository: https://github.com/sandipdey2/kubesentinel-incident-ai · Live demo: https://kubese-tbwobt7dmo4e4zbdef8t4e.streamlit.app/
 
 ## Overview and Industry Context
 
@@ -76,7 +76,7 @@ The ML components were mixed. The BGL log classifier scored F1 = 0.9859. The NAB
 
 ## Professional Relevance
 
-This project reflects the work of an AI or platform engineer in an SRE organisation. It frames an operational problem in SLO terms, chooses models according to data size and deployment limits, and integrates LLM agents through a standard protocol (MCP) instead of ad-hoc glue. It also treats safety as layered engineering: prompts, deterministic guardrails, review and human approval. The artifact is reproducible: pinned requirements, fetch and build scripts for every dataset, an executed evaluation notebook, and a Streamlit Cloud deployment that uses secrets instead of hard-coded keys. Just as important for employers, it shows professional honesty. It reports weak results such as F1 = 0.0979, discloses an evaluation that had to be fixed, and separates implemented behaviour from future work, such as a live Kubernetes API backend, log-side injection screening and an LLM-based faithfulness judge (Es et al., 2024).
+This project reflects the work of an AI or platform engineer in an SRE organisation. It frames an operational problem in SLO terms, chooses models according to data size and deployment limits, and integrates LLM agents through a standard protocol (MCP) instead of ad-hoc glue. It also treats safety as layered engineering: prompts, deterministic guardrails, review and human approval. The artifact is reproducible: pinned requirements, fetch and build scripts for every dataset, an executed evaluation notebook, and a Streamlit Cloud deployment that uses secrets instead of hard-coded keys. Just as important for employers, it shows professional honesty. It reports weak results such as F1 = 0.0979, discloses an evaluation that had to be fixed, and separates implemented behaviour from future work, such as a live Kubernetes API backend, log-side injection screening and an LLM-based faithfulness judge (Es et al., 2024). The system is deployed publicly on Streamlit Community Cloud (https://kubese-tbwobt7dmo4e4zbdef8t4e.streamlit.app/), where reviewers can replay each scenario and inspect the full agent trace.
 
 ## References
 
