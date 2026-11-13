@@ -1,4 +1,4 @@
-# Pinned from the tested environment (Python 3.13.5, Linux) with `pip list --format=freeze`,
+# Pinned from the tested environment (Python 3.13.5, Linux; also verified to install from wheels on Python 3.14.10) with `pip list --format=freeze`,
 # filtered to the packages KubeSentinel imports directly plus key transitive pins.
 # Before submitting, regenerate from your own working env with:  pip freeze > requirements.txt
 anyio==4.16.0

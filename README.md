@@ -91,7 +91,7 @@ An earlier run (grounding 0.543) exposed a tokenizer bug in the grounding scorer
 ```bash
 git clone https://github.com/sandipdey2/kubesentinel-incident-ai.git
 cd kubesentinel-incident-ai
-python -m venv .venv && source .venv/bin/activate      # Python 3.13
+python -m venv .venv && source .venv/bin/activate      # Python 3.13 or 3.14
 pip install -r requirements.txt
 export OPENAI_API_KEY=PASTE_YOUR_KEY_HERE
 export OPENAI_API_BASE=https://openai.vocareum.com/v1
@@ -110,7 +110,7 @@ Rebuild the data from upstream: `python scripts/fetch_data.py && python scripts/
 
 To deploy your own copy:
 1. Push this repo to GitHub, then go to https://share.streamlit.io → **Create app**. Pick the repo, branch `main` and main file `app.py`.
-2. **Advanced settings → Python version: 3.13.**
+2. **Advanced settings → Python version:** 3.13 or 3.14 (both tested; the live demo runs on 3.14).
 3. **Secrets:** paste the following (template in `.streamlit/secrets.toml.example`; the real `secrets.toml` is git-ignored):
    ```toml
    OPENAI_API_KEY = "PASTE_YOUR_KEY_HERE"
@@ -119,8 +119,13 @@ To deploy your own copy:
 4. Deploy. The MCP server runs as a child process of the app (`sys.executable`), so no extra service is needed. The classifiers train at start-up in about 2 s.
 
 ## Reproducibility
-- `requirements.txt` was pinned from the tested environment (Python 3.13.5, Linux) with `pip list --format=freeze`, filtered to direct and key packages. **Before submitting, regenerate it in your working env (Python 3.13.9):** `pip freeze > requirements.txt`. If you use Anaconda, `pip list --format=freeze > requirements.txt` avoids `file://` lines.
+- `requirements.txt` was pinned from the tested environment (Python 3.13.5, Linux) with `pip list --format=freeze`, filtered to direct and key packages. Every pin also installs from binary wheels on Python 3.14 (tested on 3.14.10 with `--only-binary=:all:`). **Before submitting, regenerate it in your working env (Python 3.13.9):** `pip freeze > requirements.txt`. If you use Anaconda, `pip list --format=freeze > requirements.txt` avoids `file://` lines.
 - All data subsets are committed in `data/raw/`, with download and build scripts. Seeds are fixed (`random_state=42`).
+
+### Async design note (fixed bug)
+Every synchronous call (`run_incident`, used by the Streamlit app and the scripts) is sent to **one persistent background event loop** (`core/pipeline.py`). Each run creates its own `httpx.AsyncClient` inside that loop and closes it when the run ends.
+
+An earlier version called `asyncio.run()` on every run. langchain-openai shares one process-wide cached async HTTP client, whose pooled connections stay bound to the first loop. On Streamlit Cloud (Python 3.14), the second investigation in a session therefore failed with `RuntimeError: Event loop is closed` during the `supervisor` node.
 
 ## Limitations
 - The cluster is a replay. The logs and metrics were not recorded on the Kubernetes clusters shown in the docs, so cross-signal agreement is weak by construction.

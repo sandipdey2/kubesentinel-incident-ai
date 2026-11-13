@@ -22,9 +22,17 @@ def get_credentials() -> tuple[str | None, str]:
     return key, base
 
 
-def get_llm():
+def get_llm(http_async_client=None):
+    """Build the chat model.
+
+    Pass ``http_async_client`` (an ``httpx.AsyncClient`` created inside the running event loop) for async use.
+    Without it, langchain-openai falls back to a process-wide cached async client whose pooled connections
+    stay bound to the first event loop; reusing it from a later loop raises "Event loop is closed".
+    """
     from langchain_openai import ChatOpenAI
     key, base = get_credentials()
     if not key:
         raise RuntimeError("OPENAI_API_KEY is not set (use .streamlit/secrets.toml or an environment variable).")
-    return ChatOpenAI(model=MODEL, temperature=TEMPERATURE, api_key=key, base_url=base, timeout=60, max_retries=2)
+    extra = {"http_async_client": http_async_client} if http_async_client is not None else {}
+    return ChatOpenAI(model=MODEL, temperature=TEMPERATURE, api_key=key, base_url=base, timeout=60, max_retries=2,
+                      **extra)
